@@ -19,7 +19,7 @@ RUN apt-get update \
 	&& openssl req -new -nodes -key $KEY_PATH/$DOMAIN.key -out $CERT_PATH/$DOMAIN.csr -config ${SSL_DIR}openssl.cnf -batch \
 	&& openssl x509 -req -days 365 -in $CERT_PATH/$DOMAIN.csr -signkey $KEY_PATH/$DOMAIN.key -out $CERT_PATH/$DOMAIN.crt \
 	&& echo "Include ${CONFD_DIR}*.conf" >> ${HTTPD_PREFIX}/conf/httpd.conf
-
+VOLUME /usr/local/apache2/htdocs
 EXPOSE 80
 EXPOSE 443
 CMD ["httpd", "-DFOREGROUND"]
