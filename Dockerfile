@@ -1,4 +1,4 @@
-FROM httpd:2.4
+FROM philliprower/httpd
 MAINTAINER Phillip Rower <philliprower@gmail.com>
 
 ENV HTTPD_PREFIX /usr/local/apache2
@@ -19,4 +19,8 @@ RUN apt-get update \
 	&& openssl req -new -nodes -key $KEY_PATH/$DOMAIN.key -out $CERT_PATH/$DOMAIN.csr -config ${SSL_DIR}openssl.cnf -batch \
 	&& openssl x509 -req -days 365 -in $CERT_PATH/$DOMAIN.csr -signkey $KEY_PATH/$DOMAIN.key -out $CERT_PATH/$DOMAIN.crt \
 	&& echo "Include ${CONFD_DIR}*.conf" >> ${HTTPD_PREFIX}/conf/httpd.conf
+
+EXPOSE 80
+EXPOSE 443
+CMD ["httpd", "-DFOREGROUND"]
 
