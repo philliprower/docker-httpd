@@ -12,7 +12,8 @@ RUN mkdir -p $SSL_DIR \
 ADD openssl.cnf $SSL_DIR
 ADD conf.d $CONFD_DIR
 RUN apt-get update \
-	&& apt-get install openssl \
+	&& apt-get -y install openssl \
+	&& apt-get -y install subversion \
 	&& mkdir -p $CERT_PATH \
 	&& mkdir -p $KEY_PATH \
 	&& openssl genrsa -out $KEY_PATH/$DOMAIN.key 2048 \
