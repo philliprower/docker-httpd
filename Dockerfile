@@ -7,6 +7,7 @@ ENV CONFD_DIR ${HTTPD_PREFIX}/conf/conf.d/
 ENV SSL_DIR ${HTTPD_PREFIX}/ssl/
 ENV CERT_PATH ${SSL_DIR}certs
 ENV KEY_PATH ${SSL_DIR}private
+ENV TZ US/Arizona
 RUN mkdir -p $SSL_DIR \
 	&& mkdir -p $CONFD_DIR
 ADD openssl.cnf $SSL_DIR
